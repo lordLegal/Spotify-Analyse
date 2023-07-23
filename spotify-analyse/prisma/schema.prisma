@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model api_user {
+  id_api_u       Int     @id @default(autoincrement())
+  fk_id_user_api Int?
+  access_token   String? @db.VarChar(255)
+  refreshtoken   String? @db.VarChar(255)
+  expries_at     Int?
+  scope          String? @db.VarChar(255)
+}
+
+model user {
+  id_user    Int     @id @default(autoincrement())
+  spotify_id String? @db.VarChar(255)
+  name       String? @db.VarChar(255)
+  email      String? @db.VarChar(255)
+  image      String? @db.VarChar(255)
+}
