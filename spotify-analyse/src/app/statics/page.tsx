@@ -1,18 +1,13 @@
 "use server";
-import Link from "next/link"
-import { options } from "../api/auth/[...nextauth]/options"
-import { getServerSession } from "next-auth/next"
-import '../css/home.css'
-import Image from "next/image"
-import { PrismaClient } from "@prisma/client"
-import Artstlist from "../components/artistlist"
-import { useSearchParams } from 'next/navigation'
-
-
-
-
-
-
+import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth/next";
+import Image from "next/image";
+import Link from "next/link";
+import Script from "next/script";
+import { options } from "../api/auth/[...nextauth]/options";
+import Artistlist from "../components/statics/artistlist";
+import Songlist from "../components/statics/songlist";
+import Chart from "../components/statics/chart";
 
 
 
@@ -24,9 +19,6 @@ export default async function Home({
     searchParams?: { [key: string]: string | string[] | undefined };
 }) {
     "use server";
-
-
-
 
 
     const session = await getServerSession(options)
@@ -46,18 +38,93 @@ export default async function Home({
     })
 
     // https://api.spotify.com/v1/me/top/artists
-    const time_range = searchParams?.time_range || 'short_term'
+    const song_time_range = searchParams?.song_time_range || 'short_term'
 
-    console.log(searchParams?.time_range)
+    const artist_time_range = searchParams?.artist_time_range || 'short_term'
 
-    const url = 'https://api.spotify.com/v1/me/top/artists?limit=10&time_range=' + time_range
-    const topArtists_res = await fetch(url, {
+    let large_toptracks: any[] = []
+
+    for (let i = 0; i <= 2; i++) {
+        const x = [0, 49]
+        const large_song_url = 'https://api.spotify.com/v1/me/top/tracks?limit=49&time_range=' + song_time_range + '&offset=' + x[i]
+        console.log(large_song_url)
+        const large_topSongs_res = await fetch(large_song_url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${api_user?.access_token}`
+            }
+        })
+        const large_topSongs = await large_topSongs_res.json() || [];
+        for (let i = 0; i < large_topSongs?.items?.length; i++) {
+            large_toptracks.push(large_topSongs.items[i].id)
+        }
+    }
+
+
+
+    const large_toptracks_url = 'https://api.spotify.com/v1/audio-features?ids=' + large_toptracks.join()
+    const large_toptracks_res = await fetch(large_toptracks_url, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${api_user?.access_token}`
         }
     })
-    const topArtists = await topArtists_res.json();
+    const large_toptracks_features = await large_toptracks_res.json() || [];
+
+    let acousticness = []
+    let danceability = []
+    let duration = []
+    let energy = []
+    let instrumentalness = []
+    let key = []
+    let liveness = []
+    let loudness = []
+    let mode = []
+    let speechiness = []
+    let tempo = []
+    let time_signature = []
+    let valence = []
+
+    for (let i = 0; i < large_toptracks_features?.audio_features?.length; i++) {
+
+        acousticness.push(large_toptracks_features.audio_features[i].acousticness)
+        danceability.push(large_toptracks_features.audio_features[i].danceability)
+        duration.push(large_toptracks_features.audio_features[i].duration_ms)
+        energy.push(large_toptracks_features.audio_features[i].energy)
+        instrumentalness.push(large_toptracks_features.audio_features[i].instrumentalness)
+        key.push(large_toptracks_features.audio_features[i].key)
+        liveness.push(large_toptracks_features.audio_features[i].liveness)
+        loudness.push(large_toptracks_features.audio_features[i].loudness)
+        mode.push(large_toptracks_features.audio_features[i].mode)
+        speechiness.push(large_toptracks_features.audio_features[i].speechiness)
+        tempo.push(large_toptracks_features.audio_features[i].tempo)
+        time_signature.push(large_toptracks_features.audio_features[i].time_signature)
+        valence.push(large_toptracks_features.audio_features[i].valence)
+    }
+
+    const acousticness_mitellerwert = acousticness.reduce((a, b) => a + b, 0) / acousticness.length
+    const danceability_mitellerwert = danceability.reduce((a, b) => a + b, 0) / danceability.length
+    const duration_mitellerwert = duration.reduce((a, b) => a + b, 0) / duration.length
+    const energy_mitellerwert = energy.reduce((a, b) => a + b, 0) / energy.length
+    const instrumentalness_mitellerwert = instrumentalness.reduce((a, b) => a + b, 0) / instrumentalness.length
+    const key_mitellerwert = key.reduce((a, b) => a + b, 0) / key.length
+    const liveness_mitellerwert = liveness.reduce((a, b) => a + b, 0) / liveness.length
+    const loudness_mitellerwert = loudness.reduce((a, b) => a + b, 0) / loudness.length
+    const mode_mitellerwert = mode.reduce((a, b) => a + b, 0) / mode.length
+    const speechiness_mitellerwert = speechiness.reduce((a, b) => a + b, 0) / speechiness.length
+    const tempo_mitellerwert = tempo.reduce((a, b) => a + b, 0) / tempo.length
+    const time_signature_mitellerwert = time_signature.reduce((a, b) => a + b, 0) / time_signature.length
+    const valence_mitellerwert = valence.reduce((a, b) => a + b, 0) / valence.length
+
+
+    const large_toptracks_features_mitellerwert = {
+        Acousticness: acousticness_mitellerwert,
+        Danceability: danceability_mitellerwert,
+        Energy: energy_mitellerwert,
+        Instrumentalness: instrumentalness_mitellerwert,
+        Liveness: liveness_mitellerwert,
+    }
+
 
 
 
@@ -72,50 +139,41 @@ export default async function Home({
                     <h1 className="font-sans text-6xl font-bold p-3 pb-12">Hello {session?.user?.name}, here your Spotify Stats!</h1>
                     <Image width='1000' height='1000' src={user?.image as string} alt="Account" className="h-24 w-24 rounded-full"></Image>
                     <p className="font-bold text-3xl">{session?.user?.name}</p>
-                    <h2 className="text-4xl font-bold py-8" >Top Artists</h2>
-                    <div className=" flex flex-row justify-center items-center space-x-4">
-                        <form className="flex flex-row justify-center items-center space-x-4">
-                            <input type="hidden" name="time_range" value="short_term" />
-
-                            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" >Short Term</button>
-                        </form>
-                        <form className="flex flex-row justify-center items-center space-x-4">
-                            <input type="hidden" name="time_range" value="medium_term" />
-
-                            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" >medium Term</button>
-                        </form>
-                        <form className="flex flex-row justify-center items-center space-x-4">
-                            <input type="hidden" name="time_range" value="long_term" />
-
-                            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" type="submit" >long Term</button>
-                        </form>
-                    </div>
 
 
+                    <Artistlist artist_time_range={artist_time_range as string}></Artistlist>
+
+                    <Songlist song_time_range={song_time_range as string}></Songlist>
+
+                    <Chart large_toptracks_features={large_toptracks_features_mitellerwert}></Chart>
 
 
+                    <Script id="setview" strategy="beforeInteractive">
+                        {`
+                        function isParameterSet(parameterName) {
+                            // Get the current URL
+                            const currentUrl = new URL(window.location.href);
+                            
+                            // Parse the query string of the URL
+                            const params = currentUrl.searchParams;
+                            
+                            // Check if the specified parameter is set
+                            return params.has(parameterName);
+                        }
+                        
+                        const artistisParamset = isParameterSet('artist_time_range');
 
-                    <table className=" text-left table-auto w-auto text-2xl ">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th></th>
-                                <th>Artist</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {topArtists?.items?.map((artist: any, index: number) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td className="p-3"><Image className="h-16 w-16 rounded-full" width='1000' height='1000' alt={artist.name} src={artist.images[0].url}></Image></td>
-                                    <td>{artist.name}</td>
-                                </tr>
-                            ))}
-
-                        </tbody>
-
-                    </table>
-
+                        if (artistisParamset) {
+                            document.getElementById("artist")?.scrollIntoView();
+                        }
+                        
+                        const tracksParamset = isParameterSet('song_time_range');
+                        if (tracksParamset) {
+                            document.getElementById("song")?.scrollIntoView();
+                        }
+                        
+                        `}
+                    </Script>
                 </div>
             ) : (
                 <div>

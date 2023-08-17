@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { options } from "./api/auth/[...nextauth]/options"
 import { getServerSession } from "next-auth/next"
-import './css/home.css'
+
 
 
 export default async function Home() {
@@ -20,10 +20,10 @@ export default async function Home() {
           <Link href="/api/auth/signout" >Logout</Link>
         </div>
       ) : (
-        <div>
+        <div className="my-auto  ">
 
-          <h1 className="text-5xl">You Shall Not Pass!</h1>
-          <Link href="/api/auth/signin" >Login</Link>
+          <h1 className="text-center text-3xl">Hey, we recommend to Login to see your spotify Stats and trade with spotiofy Data</h1><br></br>
+          <Link className="" href="/api/auth/signin" ><p className=" ml-96 text-center text-bold text-2xl mt-10 bg-green-700 p-5 rounded-md w-24">Login</p></Link>
         </div>
       )}
     </>
