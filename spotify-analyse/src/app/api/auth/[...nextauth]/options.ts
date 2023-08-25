@@ -20,14 +20,14 @@ export const options: NextAuthOptions = {
             const profile_ = profile as any;
 
             try {
-                const exist = await prisma.user.findMany({
+                const exist = await prisma.uSER.findMany({
                     where: {
                         spotify_id: account?.providerAccountId,
                     },
                 });
 
                 if (exist.length === 0) {
-                    await prisma.user.create({
+                    await prisma.uSER.create({
                         data: {
                             spotify_id: account?.providerAccountId,
                             email: profile?.email,
@@ -36,7 +36,7 @@ export const options: NextAuthOptions = {
                         },
                     });
                 } else {
-                    await prisma.user.update({
+                    await prisma.uSER.update({
                         where: {
                             id_user: exist[0]?.id_user,
                         },
@@ -49,30 +49,34 @@ export const options: NextAuthOptions = {
                     });
                 }
 
-                const user_ = await prisma.user.findFirst({
+                const user_ = await prisma.uSER.findFirst({
                     where: {
                         spotify_id: account?.providerAccountId,
                     },
                 });
 
-                const api_user = await prisma.api_user.findMany({
+                const api_user = await prisma.aPI_USER.findMany({
                     where: {
                         fk_id_user_api: user_?.id_user,
                     },
                 });
 
                 if (api_user.length === 0) {
-                    await prisma.api_user.create({
+                    await prisma.aPI_USER.create({
                         data: {
-                            fk_id_user_api: user_?.id_user,
                             access_token: account?.access_token,
                             refreshtoken: account?.refresh_token,
                             expries_at: account?.expires_at,
                             scope: account?.scope,
+                            user: {
+                                connect: {
+                                    id_user: user_?.id_user,
+                                },
+                            },
                         },
                     });
                 } else {
-                    await prisma.api_user.update({
+                    await prisma.aPI_USER.update({
                         where: {
                             id_api_u: api_user[0]?.id_api_u, // Added ?. for safer access
                         },
@@ -84,6 +88,26 @@ export const options: NextAuthOptions = {
                         },
                     });
                 }
+
+                const trade_user = await prisma.tRADE_USER.findMany({
+                    where: {
+                        fk_id_user: user_?.id_user,
+                    },
+                });
+
+                if (trade_user.length === 0) {
+                    await prisma.tRADE_USER.create({
+                        data: {
+                            user: {
+                                connect: {
+                                    id_user: user_?.id_user,
+                                },
+                            },
+                        },
+                    });
+                }
+
+
 
                 // Do not disconnect the PrismaClient at this point, as it will be used for subsequent operations
 

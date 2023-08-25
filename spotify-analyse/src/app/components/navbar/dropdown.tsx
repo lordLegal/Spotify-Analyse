@@ -6,9 +6,10 @@ import Image from "next/image";
 export default function DropdownMenu({
     params,
 }: {
-    params: { user: any };
+    params: { user: any, coins: string };
 }) {
     const user = params.user;
+    const coins = params.coins;
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     return (
@@ -25,9 +26,11 @@ export default function DropdownMenu({
 
                             <Link href="/" className="text-white hover:text-gray-200">Home</Link>
                             <Link href="/statics" className="text-white hover:text-gray-200">Statics</Link>
-                            <Link href="#" className="text-white hover:text-gray-200">Trade</Link>
+                            <Link href="/trade" className="text-white hover:text-gray-200">Trade</Link>
                         </div>
                         <hr className="block md:hidden"></hr>
+                        <p className="block px-4 py-2 text-sm text-white hover:text-gray-200 hover:bg-green-700 " >Coins: <span className="font-bold">{coins}</span></p>
+                        <hr className="block"></hr>
                         <Link href="/api/auth/signout" className="block px-4 py-2 text-sm text-white hover:text-gray-200 hover:bg-green-700">Logout</Link>
                     </div>
                 </div>

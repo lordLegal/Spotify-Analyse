@@ -25,13 +25,13 @@ export default async function Home({
 
     const prisma = new PrismaClient()
 
-    const user = await prisma.user.findFirst({
+    const user = await prisma.uSER.findFirst({
         where: {
             email: session?.user?.email
         }
     })
 
-    const api_user = await prisma.api_user.findFirst({
+    const api_user = await prisma.aPI_USER.findFirst({
         where: {
             fk_id_user_api: user?.id_user
         }
@@ -136,7 +136,7 @@ export default async function Home({
 
                 <div className="flex flex-col justify-center items-center  ">
 
-                    <h1 className="font-sans text-6xl font-bold p-3 pb-12">Hello {session?.user?.name}, here your Spotify Stats!</h1>
+                    <h1 className="font-sans text-4xl font-bold p-3 pb-12">Hello {session?.user?.name}, here your Spotify Stats!</h1>
                     <Image width='1000' height='1000' src={user?.image as string} alt="Account" className="h-24 w-24 rounded-full"></Image>
                     <p className="font-bold text-3xl">{session?.user?.name}</p>
 

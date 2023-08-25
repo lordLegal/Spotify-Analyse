@@ -14,5 +14,6 @@
             "password": "password",
             "database": "tradespotify"
         }
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic"
 }
