@@ -13,16 +13,7 @@ const nextConfig = {
             pathname: '/image/**',
         }]
     },
-    async rewrites() {
-        return {
-            afterFiles: [
-                {
-                    source: '/api/trade/:path*',
-                    destination: 'http://127.0.0.1:8000/:path*',
-                },
-            ]
-        }
-    }
+
 }
 
 module.exports = nextConfig
