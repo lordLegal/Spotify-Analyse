@@ -19,7 +19,7 @@ ChartJS.register(
     Legend
 );
 
-export default async function Chart({ large_toptracks_features }: { large_toptracks_features: any }) {
+export default function Chart({ large_toptracks_features }: { large_toptracks_features: any }) {
     "use client";
 
 
