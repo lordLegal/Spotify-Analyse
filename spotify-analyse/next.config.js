@@ -14,12 +14,14 @@ const nextConfig = {
         }]
     },
     async rewrites() {
-        return [
-            {
-                source: '/api/trade/:path*',
-                destination: 'http://127.0.0.1:8000/:path*',
-            },
-        ]
+        return {
+            afterFiles: [
+                {
+                    source: '/api/trade/:path*',
+                    destination: 'http://127.0.0.1:8000/:path*',
+                },
+            ]
+        }
     }
 }
 
