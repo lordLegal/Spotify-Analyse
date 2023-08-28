@@ -20,21 +20,21 @@ export default async function TradeLayout({
 
     const prisma = new PrismaClient()
 
-    const user = await prisma.uSER.findFirst({
+    const user = await prisma.user.findFirst({
         where: {
             email: session?.user?.email
         }
     })
 
-    const api_user = await prisma.aPI_USER.findFirst({
+    const api_user = await prisma.apiUser.findFirst({
         where: {
-            fk_id_user_api: user?.id_user
+            userId: user?.id
         }
     })
 
-    const trade_user = await prisma.tRADE_USER.findFirst({
+    const trade_user = await prisma.tradeUser.findFirst({
         where: {
-            fk_id_user: user?.id_user
+            userId: user?.id
         }
     })
     function formatNumberWithDots(number: number): string {

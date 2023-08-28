@@ -42,8 +42,8 @@ export default function Sidebar({
                     <p className="font-bold text-3xl">{session?.user?.name}</p>
                     <p className="text-xl">Coins: <span className="font-bold">{coins}</span></p>
                     <div className="flex flex-row justify-center items-center space-x-4">
-                        <Link href="/trade/buy"><button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Buy</button></Link>
-                        <Link href="/trade/sell"><button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Sell</button></Link>
+                        <Link href="/trade"><button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Buy</button></Link>
+                        <Link href="/trade/portfolio"><button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Portfolio</button></Link>
                     </div>
                 </div>
             </div>

@@ -1,76 +1,73 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+model ApiUser {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  access_token String?
+  refreshtoken String?
+  expries_at   Int?
+  scope        String?
+  userId       String  @map("user") @db.ObjectId
+  user         User    @relation(fields: [userId], references: [id])
 }
 
-model api_user {
-  id_api_u       Int     @id @default(autoincrement())
-  fk_id_user_api Int
-  access_token   String? @db.VarChar(255)
-  refreshtoken   String? @db.VarChar(255)
-  expries_at     Int?
-  scope          String? @db.VarChar(255)
-  user           user    @relation(fields: [fk_id_user_api], references: [id_user], map: "API_USER_fk_id_user_api_fkey")
-
-  @@index([fk_id_user_api], map: "API_USER_fk_id_user_api_fkey")
+model Artist {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  spotify_id    String?
+  name          String?
+  image         String?
+  artist_data   ArtistData[]
+  invest_artist InvestArtist[]
+  userId        String         @map("user") @db.ObjectId
 }
 
-model artist {
-  id_artits     Int             @id @default(autoincrement())
-  spotify_id    String?         @db.VarChar(255)
-  name          String?         @db.VarChar(255)
-  image         String?         @db.VarChar(255)
-  artist_data   artist_data[]
-  invest_artist invest_artist[]
-}
-
-model artist_data {
-  id_artist_data    Int      @id @default(autoincrement())
-  fk_id_artist      Int
+model ArtistData {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
   date              DateTime @default(now())
   monthly_listeners Int?
   data_count        Int?     @default(0)
-  artist            artist   @relation(fields: [fk_id_artist], references: [id_artits], map: "ARTIST_DATA_fk_id_artist_fkey")
-
-  @@index([fk_id_artist], map: "ARTIST_DATA_fk_id_artist_fkey")
+  artistId          String   @map("artist") @db.ObjectId
+  artist            Artist   @relation(fields: [artistId], references: [id])
 }
 
-model invest_artist {
-  id_invest_a  Int    @id @default(autoincrement())
-  fk_id_user   Int
-  fk_id_artist Int
+model InvestArtist {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   coins        Int?
-  artist       artist @relation(fields: [fk_id_artist], references: [id_artits], map: "INVEST_ARTIST_fk_id_artist_fkey")
-  user         user   @relation(fields: [fk_id_user], references: [id_user], map: "INVEST_ARTIST_fk_id_user_fkey")
-
-  @@index([fk_id_artist], map: "INVEST_ARTIST_fk_id_artist_fkey")
-  @@index([fk_id_user], map: "INVEST_ARTIST_fk_id_user_fkey")
+  date         DateTime @default(now())
+  operation_id Int?
+  operation    String?
+  artistId     String   @map("artist") @db.ObjectId
+  artist       Artist   @relation(fields: [artistId], references: [id])
+  userId       String   @map("user") @db.ObjectId
+  user         User     @relation(fields: [userId], references: [id])
 }
 
-model trade_user {
-  id_trade_u           Int  @id @default(autoincrement())
-  fk_id_user           Int  @unique(map: "TRADE_USER_fk_id_user_key")
-  coins                Int? @default(10000)
-  coins_invested       Int? @default(0)
-  coins_earned         Int? @default(0)
-  coins_lost           Int? @default(0)
-  coins_invested_total Int? @default(0)
-  coins_earned_total   Int? @default(0)
-  coins_lost_total     Int? @default(0)
-  user                 user @relation(fields: [fk_id_user], references: [id_user], map: "TRADE_USER_fk_id_user_fkey")
+model TradeUser {
+  id                   String @id @default(auto()) @map("_id") @db.ObjectId
+  coins                Int?   @default(10000)
+  coins_invested       Int?   @default(0)
+  coins_earned         Int?   @default(0)
+  coins_lost           Int?   @default(0)
+  coins_invested_total Int?   @default(0)
+  coins_earned_total   Int?   @default(0)
+  coins_lost_total     Int?   @default(0)
+  userId               String @unique @map("user") @db.ObjectId
+  user                 User   @relation(fields: [userId], references: [id])
 }
 
-model user {
-  id_user       Int             @id @default(autoincrement())
-  spotify_id    String?         @db.VarChar(255)
-  name          String?         @db.VarChar(255)
-  email         String?         @db.VarChar(255)
-  image         String?         @db.VarChar(255)
-  api_user      api_user[]
-  invest_artist invest_artist[]
-  trade_user    trade_user?
+model User {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  spotify_id    String?
+  name          String?
+  email         String?
+  image         String?
+  api_user      ApiUser[]
+  invest_artist InvestArtist[]
+  trade_user    TradeUser?
 }

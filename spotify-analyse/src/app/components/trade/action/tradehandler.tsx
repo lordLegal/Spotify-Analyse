@@ -1,27 +1,27 @@
 "use server";
 import { PrismaClient } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 
 export async function buyHandler(data: any) {
-    console.log(data);
     console.log(data?.get("artist_id"));
     console.log(data?.get("coins"));
     console.log(data?.get("user_id"));
     const prisma = new PrismaClient();
     const artist_spotify_id = data?.get("artist_id");
-    const coins = parseInt(data?.get("coins")); // Handle NaN case
-    const user_id = parseInt(data?.get("user_id"));
+    const coins = parseInt(data?.get("coins"));
+    const user_id = (data?.get("user_id"));
 
     console.log(artist_spotify_id);
     console.log(coins);
     console.log(user_id);
 
     if (artist_spotify_id !== null && coins !== null && user_id !== null && !isNaN(coins)) {
-        console.log("all data is there");
+        console.log(" Buy all data is there");
 
 
 
-        const artist = await prisma.aRTIST.findFirst({
+        const artist = await prisma.artist.findFirst({
             where: {
                 spotify_id: artist_spotify_id
             }
@@ -32,25 +32,29 @@ export async function buyHandler(data: any) {
             return;
         }
 
-        const artist_id = artist?.id_artits;
+        const artist_id = artist?.id;
 
 
         // create invest artist
 
-        await prisma.iNVEST_ARTIST.create({
+
+
+        await prisma.investArtist.create({
             data: {
                 coins: coins,
-                fk_id_artist: artist_id,
-                fk_id_user: user_id
+                artistId: artist_id,
+                userId: user_id,
+                operation_id: 1,
+                operation: "buy"
 
             }
         })
 
         // update trade user
 
-        const trade_user = await prisma.tRADE_USER.findFirst({
+        const trade_user = await prisma.tradeUser.findFirst({
             where: {
-                fk_id_user: user_id
+                userId: user_id
             }
         })
 
@@ -60,9 +64,9 @@ export async function buyHandler(data: any) {
 
         const new_coins_invested = coins_invested + coins;
 
-        await prisma.tRADE_USER.update({
+        await prisma.tradeUser.update({
             where: {
-                fk_id_user: user_id
+                userId: user_id
             },
             data: {
                 coins: new_coins,
@@ -71,7 +75,7 @@ export async function buyHandler(data: any) {
 
         })
 
-
+        revalidatePath("/trade");
 
     }
 }
@@ -85,7 +89,7 @@ export async function sellHandler(data: any) {
     const prisma = new PrismaClient();
     const artist_spotify_id = data?.get("artist_id");
     const coins = parseInt(data?.get("coins")); // Handle NaN case
-    const user_id = parseInt(data?.get("user_id"));
+    const user_id = (data?.get("user_id"));
 
     console.log(artist_spotify_id);
     console.log(coins);
@@ -96,7 +100,7 @@ export async function sellHandler(data: any) {
 
 
 
-        const artist = await prisma.aRTIST.findFirst({
+        const artist = await prisma.artist.findFirst({
             where: {
                 spotify_id: artist_spotify_id
             }
@@ -107,25 +111,27 @@ export async function sellHandler(data: any) {
             return;
         }
 
-        const artist_id = artist?.id_artits;
+        const artist_id = artist?.id;
 
 
         // create invest artist
 
-        await prisma.iNVEST_ARTIST.create({
+        await prisma.investArtist.create({
             data: {
                 coins: coins,
-                fk_id_artist: artist_id,
-                fk_id_user: user_id
+                artistId: artist_id,
+                userId: user_id,
+                operation_id: 2,
+                operation: "sell"
 
             }
         })
 
         // update trade user
 
-        const trade_user = await prisma.tRADE_USER.findFirst({
+        const trade_user = await prisma.tradeUser.findFirst({
             where: {
-                fk_id_user: user_id
+                userId: user_id
             }
         })
 
@@ -135,9 +141,9 @@ export async function sellHandler(data: any) {
 
         const new_coins_invested = coins_invested - coins;
 
-        await prisma.tRADE_USER.update({
+        await prisma.tradeUser.update({
             where: {
-                fk_id_user: user_id
+                userId: user_id
             },
             data: {
                 coins: new_coins,
@@ -146,6 +152,7 @@ export async function sellHandler(data: any) {
 
         })
 
+        revalidatePath("/trade");
 
 
     }

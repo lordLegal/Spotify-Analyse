@@ -17,29 +17,29 @@ export default async function Buttons(params: any) {
 
     const prisma = new PrismaClient()
 
-    const user = await prisma.uSER.findFirst({
+    const user = await prisma.user.findFirst({
         where: {
             email: session?.user?.email
         }
     })
 
-    const tradeUser = await prisma.tRADE_USER.findFirst({
+    const tradeUser = await prisma.tradeUser.findFirst({
         where: {
-            fk_id_user: user?.id_user
+            userId: user?.id
         }
     })
 
     const coins = tradeUser?.coins ?? 0;
     const coinsInvested = tradeUser?.coins_invested ?? 0;
-    const max = coins - coinsInvested;
+    const max = coins;
 
 
 
 
     return (
         <>
-            <Buy max={max} coins={coins} artist={artist} user={user?.id_user} />
-            <Sell max={max} coins={coins} artist={artist} user={user?.id_user} />
+            <Buy max={max} coins={coins} artist={artist} user={user?.id} />
+            <Sell max={max} coins={coins} artist={artist} user={user?.id} />
             <More />
         </>
     );

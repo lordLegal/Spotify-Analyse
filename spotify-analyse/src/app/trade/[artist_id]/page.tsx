@@ -29,21 +29,21 @@ export default async function Trade({
 
     const prisma = new PrismaClient()
 
-    const user = await prisma.uSER.findFirst({
+    const user = await prisma.user.findFirst({
         where: {
             email: session?.user?.email
         }
     })
 
-    const api_user = await prisma.aPI_USER.findFirst({
+    const api_user = await prisma.apiUser.findFirst({
         where: {
-            fk_id_user_api: user?.id_user
+            userId: user?.id
         }
     })
 
-    const trade_user = await prisma.tRADE_USER.findFirst({
+    const trade_user = await prisma.tradeUser.findFirst({
         where: {
-            fk_id_user: user?.id_user
+            userId: user?.id
         }
     })
     function formatNumberWithDots(number: number): string {
@@ -73,18 +73,21 @@ export default async function Trade({
 
     console.log(monthly)
 
-    const dbartist = await prisma.aRTIST.findMany({
+    const dbartist = await prisma.artist.findMany({
         where: {
             spotify_id: params?.artist_id as string,
         },
     });
 
-    if (dbartist.length === 0) {
-        await prisma.aRTIST.create({
+
+
+    if (dbartist.length === 0 && artist !== undefined && user !== undefined) {
+        await prisma.artist.create({
             data: {
                 spotify_id: params?.artist_id as string,
                 name: artist?.name,
                 image: artist?.images[0].url,
+                userId: user?.id ?? 'null',
             },
         });
     }

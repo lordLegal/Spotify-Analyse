@@ -13,15 +13,15 @@ export default async function Artistlist(artist_time_range = 'short_term' as any
 
     const prisma = new PrismaClient()
 
-    const user = await prisma.uSER.findFirst({
+    const user = await prisma.user.findFirst({
         where: {
             email: session?.user?.email
         }
     })
 
-    const api_user = await prisma.aPI_USER.findFirst({
+    const api_user = await prisma.apiUser.findFirst({
         where: {
-            fk_id_user_api: user?.id_user
+            userId: user?.id
         }
     })
     console.log(artist_time_range.artist_time_range)
