@@ -11,7 +11,7 @@ def sanitize(input_html: str):
     return str(cleaner.clean_html(input_html)).replace("<p>", "").replace("</p>", "")
 
 
-@app.get("/{artist_id}")
+@app.get("/api/trade/{artist_id}")
 async def artist(artist_id: str):
     artist_id = str(sanitize(artist_id))
 

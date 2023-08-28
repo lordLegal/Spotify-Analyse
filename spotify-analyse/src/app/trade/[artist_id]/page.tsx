@@ -62,7 +62,7 @@ export default async function Trade({
     })
 
     const artist = await artist_res?.json();
-    const artist_mothly_listeners_url = 'http://127.0.0.1:8000/' + params?.artist_id as string
+    const artist_mothly_listeners_url = '/api/trade/' + params?.artist_id as string
     const artist_mothly_listeners_res = await fetch(artist_mothly_listeners_url, {
         method: 'GET',
     })
