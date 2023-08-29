@@ -29,9 +29,19 @@ export default async function Buttons(params: any) {
         }
     })
 
-    const coins = tradeUser?.coins ?? 0;
-    const coinsInvested = tradeUser?.coins_invested ?? 0;
-    const max = coins;
+    const tradeArtist = await prisma.investArtist.findFirst({
+        where: {
+            artistId: artist?.id,
+            userId: user?.id
+        }
+    })
+
+
+    const coins = tradeUser?.coins as number;
+    const coinsInvested = tradeUser?.coins_invested as number;
+    const max = coins as number;
+    const sellMax = tradeArtist?.coins as number;
+
 
 
 
@@ -39,7 +49,7 @@ export default async function Buttons(params: any) {
     return (
         <>
             <Buy max={max} coins={coins} artist={artist} user={user?.id} />
-            <Sell max={max} coins={coins} artist={artist} user={user?.id} />
+            <Sell max={sellMax} coins={coins} artist={artist} user={user?.id} />
             <More />
         </>
     );

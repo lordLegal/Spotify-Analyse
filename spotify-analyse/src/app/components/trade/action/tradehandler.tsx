@@ -4,22 +4,13 @@ import { revalidatePath } from "next/cache";
 
 
 export async function buyHandler(data: any) {
-    console.log(data?.get("artist_id"));
-    console.log(data?.get("coins"));
-    console.log(data?.get("user_id"));
     const prisma = new PrismaClient();
     const artist_spotify_id = data?.get("artist_id");
     const coins = parseInt(data?.get("coins"));
     const user_id = (data?.get("user_id"));
 
-    console.log(artist_spotify_id);
-    console.log(coins);
-    console.log(user_id);
-
     if (artist_spotify_id !== null && coins !== null && user_id !== null && !isNaN(coins)) {
         console.log(" Buy all data is there");
-
-
 
         const artist = await prisma.artist.findFirst({
             where: {
@@ -107,17 +98,10 @@ export async function buyHandler(data: any) {
 
 
 export async function sellHandler(data: any) {
-    console.log(data?.get("artist_id"));
-    console.log(data?.get("coins"));
-    console.log(data?.get("user_id"));
     const prisma = new PrismaClient();
     const artist_spotify_id = data?.get("artist_id");
     const coins = parseInt(data?.get("coins"));
     const user_id = (data?.get("user_id"));
-
-    console.log(artist_spotify_id);
-    console.log(coins);
-    console.log(user_id);
 
     if (artist_spotify_id !== null && coins !== null && user_id !== null && !isNaN(coins)) {
         console.log(" Buy all data is there");
