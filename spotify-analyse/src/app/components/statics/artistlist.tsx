@@ -40,6 +40,8 @@ export default async function Artistlist(artist_time_range = 'short_term' as any
     }
 
     const genres = getUniqueGenres(topArtists)
+    genres.splice(5)
+
 
 
 
