@@ -85,7 +85,7 @@ export default async function Trade({
                             />
 
                             <h2 className="text-center">{artist?.name}</h2>
-                            <Link href={"/trade/" + artist?.id} className="block bg-green-500 text-white text-center py-2 rounded">Buy</Link>
+                            <Link href={"/trade/" + artist?.id} className="block bg-green-500 text-white text-center py-2 rounded">TRADE</Link>
                         </div>
                     ))}
 
