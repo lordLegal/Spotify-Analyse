@@ -101,7 +101,7 @@ export default async function Trade({
 
 
             <h1 className="font-sans text-4xl font-bold p-3 pb-12">Hello {session?.user?.name}, you want to Trade your Spotify coins?</h1>
-            <Link href={"/trade"} className="block bg-green-500 text-white text-center py-2 rounded">Back</Link>
+            <Link href={"/trade"} className="block bg-green-500 text-white text-center rounded p-2 mr-10">Back</Link>
             <h2 className="text-4xl font-bold py-8" id="artist" >Invest in </h2>
 
             <div className="flex flex-row justify-center items-center">
