@@ -36,7 +36,7 @@ export default function More() {
                             <h3 className="mb-4 ">How much?</h3>
                             <button
                                 onClick={handleCloseModal}
-                                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                className="ml-48 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                             >
                                 Close Modal
                             </button>

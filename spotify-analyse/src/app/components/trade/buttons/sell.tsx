@@ -5,11 +5,15 @@ import { sellHandler } from '../action/tradehandler';
 
 export default function Sell(params: any) {
 
-    const max = params.max;
+    let max = params.max;
     const coins = params.coins;
     const artist = params.artist;
     const user = params.user;
+    console.log(max);
 
+    if (isNaN(max)) {
+        max = 0;
+    }
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -47,6 +51,17 @@ export default function Sell(params: any) {
                             </button>
                             <h2 className="text-2xl mb-4 text-green-500 font-bold">You want to Sell?!</h2>
                             <h3 className="mb-4 ">How much?</h3>
+                            <p className="mb-4">You can Sell a maximum of {max} coins!</p>
+                            <form action={sellHandler}>
+                                <input type="hidden" name="artist_id" value={artist} />
+                                <input type="hidden" name="user_id" value={user} />
+                                <div className="mb-4">
+                                    <input title='coins' type="hidden" name="coins" required
+                                        value={max as string} className="mt-1 p-2 w-full border rounded-md text-black"></input>
+                                </div>
+
+                                <button type="submit" className="bg-zinc-800 border-2 border-zinc-800 hover:border-zinc-900 text-white font-bold py-2 px-4 rounded mb-5">Sell all you can!</button>
+                            </form>
                             <form action={sellHandler}>
                                 <input type="hidden" name="artist_id" value={artist} />
                                 <input type="hidden" name="user_id" value={user} />
@@ -55,7 +70,7 @@ export default function Sell(params: any) {
                                         min="1"
                                         max={max as string} className="mt-1 p-2 w-full border rounded-md text-black"></input>
                                 </div>
-                                <button type="submit" className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-5">Sell</button>
+                                <button type="submit" className="ml-48 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-5">Sell</button>
                             </form>
                         </div>
 

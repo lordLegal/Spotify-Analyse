@@ -40,7 +40,7 @@ export default async function Buttons(params: any) {
     const coins = tradeUser?.coins as number;
     const coinsInvested = tradeUser?.coins_invested as number;
     const max = coins as number;
-    const sellMax = (tradeArtist?.coins as number) - (tradeArtist?.plusCoins as number);
+    const sellMax = (tradeArtist?.coins as number) + (tradeArtist?.plusCoins as number);
 
 
 

@@ -48,15 +48,28 @@ export default function Buy(params: any) {
                             </button>
                             <h2 className="text-2xl mb-4 text-green-500 font-bold">You want to Buy?!</h2>
                             <h3 className="mb-4 ">How much?</h3>
+                            <p className="mb-4">You can invest {max} coins</p>
                             <form action={buyHandler}>
                                 <input type="hidden" name="artist_id" value={artist} />
                                 <input type="hidden" name="user_id" value={user} />
                                 <div className="mb-4">
-                                    <input title='coins' type="number" id="coins" name="coins" required
+                                    <input title='coins' type="hidden" name="coins" required
+                                        value={max as string} className="mt-1 p-2 w-full border rounded-md text-black"></input>
+                                </div>
+
+                                <button type="submit" className="bg-zinc-800 border-2 border-zinc-800 hover:border-zinc-900 text-white font-bold py-2 px-4 rounded mb-5">Invest all you can!</button>
+                            </form>
+                            <form action={buyHandler}>
+                                <input type="hidden" name="artist_id" value={artist} />
+                                <input type="hidden" name="user_id" value={user} />
+                                <div className="mb-4">
+                                    <input title='coins' type="number" name="coins" required
                                         min="1"
                                         max={max as string} className="mt-1 p-2 w-full border rounded-md text-black"></input>
                                 </div>
-                                <button type="submit" className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-5">Invest</button>
+
+                                <button type="submit" className="ml-48 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-5">Invest</button>
+
                             </form>
                         </div>
 
