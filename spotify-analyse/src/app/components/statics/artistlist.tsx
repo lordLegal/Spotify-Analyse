@@ -100,7 +100,7 @@ export default async function Artistlist(artist_time_range = 'short_term' as any
             </div>
 
             <h2 className="text-4xl font-bold py-8">Top Genres</h2>
-            <div className="flex felx-row max-w-3xl mx-auto" >
+            <div className="grid grid-cols-3 md:grid-cols-5 gap-4 max-w-2xl mx-auto" >
                 {genres.map((genre, index) => (
                     <div className=" bg-zinc-900 text-white hover:text-green-500  p-2 ml-4 rounded shadow-md" key={index}>
                         {genre}

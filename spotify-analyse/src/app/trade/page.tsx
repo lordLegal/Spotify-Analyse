@@ -61,10 +61,6 @@ export default async function Trade({
 
     return (
         <>
-
-
-
-
             <h1 className="font-sans text-4xl font-bold p-3 pb-12">Hello {session?.user?.name}, you want to Trade your Spotify coins?</h1>
             <Image width='1000' height='1000' src={user?.image as string} alt="Account" className="h-24 w-24 rounded-full"></Image>
             <p className="font-bold text-3xl">{session?.user?.name}</p>
@@ -83,7 +79,6 @@ export default async function Trade({
                                 alt="Artist Profile"
                                 className="rounded-full w-32 h-32 mx-auto"
                             />
-
                             <h2 className="text-center">{artist?.name}</h2>
                             <Link href={"/trade/" + artist?.id} className="block bg-green-500 text-white text-center py-2 rounded">TRADE</Link>
                         </div>

@@ -37,9 +37,34 @@ export async function buyHandler(data: any) {
 
         // create invest artist
 
+        const investArtist = await prisma.investArtist.findMany({
+            where: {
+                artistId: artist_id,
+                userId: user_id
+            }
+        })
 
+        if (investArtist.length > 0) {
+            console.log("invest artist already exists");
+            await prisma.investArtist.update({
+                where: {
+                    id: investArtist[0].id
+                },
+                data: {
+                    coins: investArtist[0].coins as number + coins
+                }
+            })
+        } else {
+            await prisma.investArtist.create({
+                data: {
+                    coins: coins,
+                    artistId: artist_id,
+                    userId: user_id,
+                }
+            })
+        }
 
-        await prisma.investArtist.create({
+        await prisma.investArtistLog.create({
             data: {
                 coins: coins,
                 artistId: artist_id,
@@ -58,9 +83,9 @@ export async function buyHandler(data: any) {
             }
         })
 
-        const coins_invested = trade_user?.coins_invested ?? 0;
+        const coins_invested = trade_user?.coins_invested as number;
 
-        const new_coins = (trade_user?.coins ?? 0) - coins;
+        const new_coins = (trade_user?.coins as number) - coins;
 
         const new_coins_invested = coins_invested + coins;
 
@@ -82,13 +107,12 @@ export async function buyHandler(data: any) {
 
 
 export async function sellHandler(data: any) {
-    console.log(data);
     console.log(data?.get("artist_id"));
     console.log(data?.get("coins"));
     console.log(data?.get("user_id"));
     const prisma = new PrismaClient();
     const artist_spotify_id = data?.get("artist_id");
-    const coins = parseInt(data?.get("coins")); // Handle NaN case
+    const coins = parseInt(data?.get("coins"));
     const user_id = (data?.get("user_id"));
 
     console.log(artist_spotify_id);
@@ -96,7 +120,7 @@ export async function sellHandler(data: any) {
     console.log(user_id);
 
     if (artist_spotify_id !== null && coins !== null && user_id !== null && !isNaN(coins)) {
-        console.log("all data is there");
+        console.log(" Buy all data is there");
 
 
 
@@ -116,7 +140,35 @@ export async function sellHandler(data: any) {
 
         // create invest artist
 
-        await prisma.investArtist.create({
+        const investArtist = await prisma.investArtist.findMany({
+            where: {
+                artistId: artist_id,
+                userId: user_id
+            }
+        })
+
+        if (investArtist.length > 0) {
+            console.log("invest artist already exists");
+            console.log((investArtist[0].coins as number - coins));
+            await prisma.investArtist.update({
+                where: {
+                    id: investArtist[0].id
+                },
+                data: {
+                    coins: investArtist[0].coins as number - coins
+                }
+            })
+        } else {
+            await prisma.investArtist.create({
+                data: {
+                    coins: coins,
+                    artistId: artist_id,
+                    userId: user_id,
+                }
+            })
+        }
+
+        await prisma.investArtistLog.create({
             data: {
                 coins: coins,
                 artistId: artist_id,
@@ -135,9 +187,9 @@ export async function sellHandler(data: any) {
             }
         })
 
-        const coins_invested = trade_user?.coins_invested ?? 0;
+        const coins_invested = trade_user?.coins_invested as number;
 
-        const new_coins = (trade_user?.coins ?? 0) + coins;
+        const new_coins = (trade_user?.coins as number) + coins;
 
         const new_coins_invested = coins_invested - coins;
 
@@ -153,7 +205,6 @@ export async function sellHandler(data: any) {
         })
 
         revalidatePath("/trade");
-
 
     }
 

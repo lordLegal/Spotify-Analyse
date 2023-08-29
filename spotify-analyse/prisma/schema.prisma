@@ -18,13 +18,14 @@ model ApiUser {
 }
 
 model Artist {
-  id            String         @id @default(auto()) @map("_id") @db.ObjectId
-  spotify_id    String?
-  name          String?
-  image         String?
-  artist_data   ArtistData[]
-  invest_artist InvestArtist[]
-  userId        String         @map("user") @db.ObjectId
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
+  spotify_id        String?
+  name              String?
+  image             String?
+  artist_data       ArtistData[]
+  invest_artist_log InvestArtistLog[]
+  invest_artist     InvestArtist[]
+  userId            String            @map("user") @db.ObjectId
 }
 
 model ArtistData {
@@ -36,7 +37,7 @@ model ArtistData {
   artist            Artist   @relation(fields: [artistId], references: [id])
 }
 
-model InvestArtist {
+model InvestArtistLog {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   coins        Int?
   date         DateTime @default(now())
@@ -46,6 +47,15 @@ model InvestArtist {
   artist       Artist   @relation(fields: [artistId], references: [id])
   userId       String   @map("user") @db.ObjectId
   user         User     @relation(fields: [userId], references: [id])
+}
+
+model InvestArtist {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  coins    Int?
+  artistId String @map("artist") @db.ObjectId
+  artist   Artist @relation(fields: [artistId], references: [id])
+  userId   String @map("user") @db.ObjectId
+  user     User   @relation(fields: [userId], references: [id])
 }
 
 model TradeUser {
@@ -62,12 +72,13 @@ model TradeUser {
 }
 
 model User {
-  id            String         @id @default(auto()) @map("_id") @db.ObjectId
-  spotify_id    String?
-  name          String?
-  email         String?
-  image         String?
-  api_user      ApiUser[]
-  invest_artist InvestArtist[]
-  trade_user    TradeUser?
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
+  spotify_id        String?
+  name              String?
+  email             String?
+  image             String?
+  api_user          ApiUser[]
+  invest_artist_log InvestArtistLog[]
+  trade_user        TradeUser?
+  invert_artist     InvestArtist[]
 }

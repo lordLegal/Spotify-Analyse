@@ -41,6 +41,27 @@ export default async function Portfolio({
             userId: user?.id
         }
     })
+
+    const investedArtists = await prisma.investArtist.findMany({
+        where: {
+            userId: user?.id
+        }
+    })
+
+    console.log(investedArtists)
+
+    const artists = await Promise.all(investedArtists.map(async (investedArtist) => {
+        const artist = await prisma.artist.findFirst({
+            where: {
+                id: investedArtist.artistId
+            }
+        })
+        return artist
+    }))
+
+    console.log(artists)
+
+
     function formatNumberWithDots(number: number): string {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
@@ -62,10 +83,37 @@ export default async function Portfolio({
     return (
         <>
 
-            <div className="flex flex-col h-screen">
-                <div className="flex flex-row h-1/6">
-                    <h3 className="text-3xl font-bold text-white">Portfolio</h3>
-                </div>
+
+            <h1 className="text-5xl font-bold text-white mt-4">Portfolio</h1>
+            <Image width='1000' height='1000' src={user?.image as string} alt="Account" className="h-24 w-24 rounded-full"></Image>
+            <p className="font-bold text-3xl">{session?.user?.name}</p>
+            <p className=" text-xl" >Coins: <span className="font-bold">{coins}</span></p>
+            <h3 className="text-3xl font-bold text-white mt-4">Invested Artists</h3>
+            <div className="grid grid-cols-1 gap-4">
+                {artists?.map((artist: any, index: number) => (
+
+                    <div className="flex-none  border-2 border-green-700 rounded-lg p-4 space-y-2 max-w-3xl" key={index}>
+                        <table>
+                            <tr>
+                                <th className="w-48">
+                                    <Image
+                                        width='1000'
+                                        height='1000'
+                                        src={artist?.image}
+                                        alt="Artist Profile"
+                                        className="rounded-full w-32 h-32 mx-auto"
+                                    />
+                                    <h2 className="text-center">{artist?.name}</h2>
+                                    <Link href={"/trade/" + artist?.id} className="block bg-green-500 text-white text-center py-2 rounded">TRADE</Link>
+                                </th>
+                                <td>
+                                    <p className="text-center">Coins Invested: {investedArtists[index].coins}</p>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                ))}
             </div>
         </>
     )
