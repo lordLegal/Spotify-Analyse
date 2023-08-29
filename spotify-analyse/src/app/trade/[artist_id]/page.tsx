@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { options } from "@/app/api/auth/[...nextauth]/options";
-import { VscAdd, VscChromeMinimize, VscEllipsis } from "react-icons/vsc";
 import Buttons from "@/app/components/trade/buttons";
+import { IoMdArrowRoundBack } from 'react-icons/io'
 
 
 
@@ -101,7 +101,7 @@ export default async function Trade({
 
 
             <h1 className="font-sans text-4xl font-bold p-3 pb-12">Hello {session?.user?.name}, you want to Trade your Spotify coins?</h1>
-            <Link href={"/trade"} className="felx bg-green-500 text-white text-center rounded p-2 mr-10">Back</Link>
+            <Link href={"/trade"} className="felx bg-green-500 text-white text-center rounded p-2 mr-36"><IoMdArrowRoundBack></IoMdArrowRoundBack></Link>
             <h2 className="text-4xl font-bold py-8" id="artist" >Invest in </h2>
 
             <div className="flex flex-row justify-center items-center">
