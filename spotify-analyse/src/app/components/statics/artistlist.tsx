@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import { options } from "../../api/auth/[...nextauth]/options";
 import Link from "next/link";
+import { VscLinkExternal } from "react-icons/vsc";
 
 
 export default async function Artistlist(artist_time_range = 'short_term' as any) {
@@ -76,6 +77,7 @@ export default async function Artistlist(artist_time_range = 'short_term' as any
                             <th className="py-2 px-4 text-green-500 text-2xl">#</th>
                             <th className="py-2 px-4 text-green-500 text-2xl">Image</th>
                             <th className="py-2 px-4 text-green-500 text-2xl">Artist</th>
+                            <th className="py-2 px-4 text-green-500 text-2xl">Link</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,6 +87,7 @@ export default async function Artistlist(artist_time_range = 'short_term' as any
                                     <td className="py-2 px-4 text-center">{index + 1}</td>
                                     <td className="py-2 px-4"><Image className="w-16 h-16 object-cover rounded-lg" width='1000' height='1000' alt={artist.name} src={artist.images[0].url}></Image></td>
                                     <td className="py-2 px-4">{artist.name}</td>
+                                    <td className="py-2 px-4 text-xs md:text-xl"><Link href={artist.external_urls.spotify}><VscLinkExternal></VscLinkExternal></Link></td>
                                 </tr>
                             </Link>
                         ))}
