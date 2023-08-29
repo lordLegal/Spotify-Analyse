@@ -7,3 +7,4 @@
 (G) sort Projekt structer
 (E) Shop
 (H) Glücksspiel
+Trade Statistic
