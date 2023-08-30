@@ -87,7 +87,6 @@ export default async function Trade({
                 spotify_id: params?.artist_id as string,
                 name: artist?.name,
                 image: artist?.images[0].url,
-                userId: user?.id ?? 'null',
             },
         });
     }

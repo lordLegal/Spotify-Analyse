@@ -25,7 +25,6 @@ model Artist {
   artist_data       ArtistData[]
   invest_artist_log InvestArtistLog[]
   invest_artist     InvestArtist[]
-  userId            String            @map("user") @db.ObjectId
 }
 
 model ArtistData {
@@ -50,13 +49,14 @@ model InvestArtistLog {
 }
 
 model InvestArtist {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  coins     Int?
-  plusCoins Int?   @default(0)
-  artistId  String @map("artist") @db.ObjectId
-  artist    Artist @relation(fields: [artistId], references: [id])
-  userId    String @map("user") @db.ObjectId
-  user      User   @relation(fields: [userId], references: [id])
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  investedCoins Int?   @default(0)
+  plusCoins     Int?   @default(0)
+  coins         Int?   @default(0)
+  artistId      String @map("artist") @db.ObjectId
+  artist        Artist @relation(fields: [artistId], references: [id])
+  userId        String @map("user") @db.ObjectId
+  user          User   @relation(fields: [userId], references: [id])
 }
 
 model TradeUser {

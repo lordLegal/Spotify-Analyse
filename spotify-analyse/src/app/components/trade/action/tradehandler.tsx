@@ -42,12 +42,14 @@ export async function buyHandler(data: any) {
                     id: investArtist[0].id
                 },
                 data: {
+                    investedCoins: investArtist[0].investedCoins as number + coins,
                     coins: investArtist[0].coins as number + coins
                 }
             })
         } else {
             await prisma.investArtist.create({
                 data: {
+                    investedCoins: coins,
                     coins: coins,
                     artistId: artist_id,
                     userId: user_id,
@@ -104,9 +106,18 @@ export async function sellHandler(data: any) {
     const user_id = (data?.get("user_id"));
 
     if (artist_spotify_id !== null && coins !== null && user_id !== null && !isNaN(coins)) {
-        console.log(" Buy all data is there");
+        console.log(" Sell all data is there");
 
+        const user = await prisma.user.findFirst({
+            where: {
+                id: user_id
+            }
+        })
 
+        if (user === null) {
+            console.log("user not found");
+            return;
+        }
 
         const artist = await prisma.artist.findFirst({
             where: {
@@ -121,9 +132,6 @@ export async function sellHandler(data: any) {
 
         const artist_id = artist?.id;
 
-
-        // create invest artist
-
         const investArtist = await prisma.investArtist.findMany({
             where: {
                 artistId: artist_id,
@@ -131,26 +139,36 @@ export async function sellHandler(data: any) {
             }
         })
 
+        if (investArtist.length === 0) {
+            console.log("invest artist not found");
+            return;
+        }
+
+        const coinsNow = investArtist[0].coins as number;
+
+        if (coinsNow < coins) {
+            console.log("Your Max is " + coinsNow + " you want to sell " + coins);
+            return;
+        }
+
+
         if (investArtist.length > 0) {
             console.log("invest artist already exists");
-            console.log((investArtist[0].coins as number - coins));
-            const sellMax = (investArtist[0]?.coins as number) + (investArtist[0]?.plusCoins as number);
-            if (sellMax < coins) {
-                console.log("sell max is less than coins");
-                return;
-            } else if (sellMax === coins) {
+            if (investArtist[0].coins === coins) {
                 await prisma.investArtist.delete({
                     where: {
                         id: investArtist[0].id
                     }
                 })
             } else {
+
                 await prisma.investArtist.update({
                     where: {
                         id: investArtist[0].id
                     },
                     data: {
-                        coins: investArtist[0].coins as number - coins
+                        coins: investArtist[0].coins as number - coins,
+                        investedCoins: investArtist[0].investedCoins as number - coins
                     }
                 })
             }
@@ -191,13 +209,15 @@ export async function sellHandler(data: any) {
 
             })
 
-
+        } else {
+            return;
         }
-
 
 
         revalidatePath("/trade");
 
     }
 
+
 }
+
