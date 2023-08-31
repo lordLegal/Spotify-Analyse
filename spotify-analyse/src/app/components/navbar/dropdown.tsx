@@ -3,6 +3,11 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 
+import { AiOutlineHome } from 'react-icons/ai'
+import { FcStatistics } from 'react-icons/fc'
+import { FaExchangeAlt } from 'react-icons/fa'
+
+
 export default function DropdownMenu({
     params,
 }: {
@@ -24,9 +29,9 @@ export default function DropdownMenu({
                     <div role="menuitem">
                         <div className="  flex flex-col md:hidden  px-4 py-2 ">
 
-                            <Link href="/" className="text-white hover:text-gray-200">Home</Link>
-                            <Link href="/statics" className="text-white hover:text-gray-200">Statics</Link>
-                            <Link href="/trade" className="text-white hover:text-gray-200">Trade</Link>
+                            <Link href="/" className="flex flex-row items-center justify-start text-white  font-bold "><AiOutlineHome className="mr-2 stroke-2" />Home</Link>
+                            <Link href="/statics" className="flex flex-row items-center justify-start text-white  font-bold "><FcStatistics className="mr-2 stroke-2" />Statistics</Link>
+                            <Link href="/trade" className="flex flex-row items-center justify-start text-white  font-bold "><FaExchangeAlt className="mr-2 stroke-1" />Trade</Link>
                         </div>
                         <hr className="block md:hidden"></hr>
                         <p className="block px-4 py-2 text-sm text-white hover:text-gray-200 hover:bg-green-700 " >Coins: <span className="font-bold">{coins}</span></p>

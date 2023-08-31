@@ -3,6 +3,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiArrowRight, FiArrowLeft } from 'react-icons/fi';
+import { AiOutlineHome } from 'react-icons/ai'
+import { LiaStackExchange } from 'react-icons/lia'
+import { FaExchangeAlt } from 'react-icons/fa'
 
 export default function Sidebar({
     params,
@@ -41,9 +44,10 @@ export default function Sidebar({
                     <Image width='1000' height='1000' src={user?.image as string} alt="Account" className="h-24 w-24 rounded-full"></Image>
                     <p className="font-bold text-3xl">{session?.user?.name}</p>
                     <p className="text-xl">Coins: <span className="font-bold">{coins}</span></p>
-                    <div className="flex flex-row justify-center items-center space-x-4">
-                        <Link href="/trade"><button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Buy</button></Link>
-                        <Link href="/trade/portfolio"><button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Portfolio</button></Link>
+                    <div className='w-full items-start justify-start' >
+
+                        <Link href="/trade" className="flex flex-row items-center justify-start text-white text-xl font-bold mt-4"><FaExchangeAlt className="mr-2" />Trade</Link>
+                        <Link href="/trade/portfolio" className="flex flex-row items-center justify-start text-white text-xl font-bold mt-4"><LiaStackExchange className="mr-2" />Portfolio</Link>
                     </div>
                 </div>
             </div>

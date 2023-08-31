@@ -31,7 +31,7 @@ export default function More() {
                     ></div>
                     <div className="fixed inset-0 flex items-center justify-center z-50 ">
 
-                        <div className="bg-zinc-900  p-8 rounded-lg shadow-lg w-1/3">
+                        <div className="bg-zinc-900  p-8 rounded-lg shadow-lg w-2/3 lg:w-1/3">
                             <h2 className="text-2xl mb-4 text-green-500 font-bold">You want to Buy?!</h2>
                             <h3 className="mb-4 ">How much?</h3>
                             <button

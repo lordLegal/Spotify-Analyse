@@ -4,6 +4,9 @@ import { options } from "../../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth/next";
 import { PrismaClient } from "@prisma/client";
 import DropdownMenu from "./dropdown";
+import { AiOutlineHome } from 'react-icons/ai'
+import { FcStatistics } from 'react-icons/fc'
+import { FaExchangeAlt } from 'react-icons/fa'
 
 export default async function Nav() {
     const session = await getServerSession(options);
@@ -42,9 +45,9 @@ export default async function Nav() {
                         </div>
 
                         <div className="hidden md:flex space-x-4">
-                            <Link href="/" className="text-white hover:text-gray-200">Home</Link>
-                            <Link href="/statics" className="text-white hover:text-gray-200">Statics</Link>
-                            <Link href="/trade" className="text-white hover:text-gray-200">Trade</Link>
+                            <Link href="/" className="flex flex-row items-center justify-start text-white  font-bold "><AiOutlineHome className="mr-2 stroke-2" />Home</Link>
+                            <Link href="/statics" className="flex flex-row items-center justify-start text-white  font-bold "><FcStatistics className="mr-2 stroke-2" />Statistics</Link>
+                            <Link href="/trade" className="flex flex-row items-center justify-start text-white  font-bold "><FaExchangeAlt className="mr-2 stroke-1" />Trade</Link>
                         </div>
 
                         {session ? (

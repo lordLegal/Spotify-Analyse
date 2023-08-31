@@ -50,7 +50,6 @@ export default async function Trade({
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
 
-    const coins = formatNumberWithDots(trade_user?.coins || 0)
 
     const artist_url = 'https://api.spotify.com/v1/artists/' + params?.artist_id as string
     console.log(artist_url)
@@ -95,10 +94,6 @@ export default async function Trade({
 
     return (
         <>
-
-
-
-
             <h1 className="font-sans text-4xl font-bold p-3 pb-12">Hello {session?.user?.name}, you want to Trade your Spotify coins?</h1>
             <Link href={"/trade"} style={{ marginLeft: "-24rem" }} className="felx bg-green-500 text-white text-center rounded p-2 mr-36"><IoMdArrowRoundBack></IoMdArrowRoundBack></Link>
             <h2 className="text-4xl font-bold py-8" id="artist" >Invest in </h2>
@@ -116,20 +111,6 @@ export default async function Trade({
                     <Buttons artist={params?.artist_id}></Buttons>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </>
     )
 }

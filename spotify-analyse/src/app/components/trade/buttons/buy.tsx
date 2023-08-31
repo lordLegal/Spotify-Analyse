@@ -39,7 +39,7 @@ export default function Buy(params: any) {
                     ></div>
                     <div className="fixed inset-0 flex items-center justify-center z-50 ">
 
-                        <div className="bg-zinc-900 p-8 rounded-lg shadow-lg w-1/3 relative"> {/* Add relative positioning here */}
+                        <div className="bg-zinc-900 p-8 rounded-lg shadow-lg w-2/3 lg:w-1/3 relative">
                             <button
                                 onClick={handleCloseModal}
                                 className="bg-green-800 text-white p-2 rounded-full hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-green-800 absolute top-4 right-4"

@@ -3,9 +3,8 @@ import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import Link from "next/link";
-
 import { options } from "@/app/api/auth/[...nextauth]/options"
-
+import { FaExchangeAlt } from 'react-icons/fa'
 
 
 
@@ -89,6 +88,7 @@ export default async function Portfolio({
             <p className="font-bold text-3xl">{session?.user?.name}</p>
             <p className=" text-xl" >Coins: <span className="font-bold">{coins}</span></p>
             <h3 className="text-3xl font-bold text-white mt-4">Invested Artists</h3>
+            {artists?.length === 0 && <p className="text-white">You have not invested in any artists yet.</p>}
             <div className="grid grid-cols-1 gap-4">
                 {artists?.map((artist: any, index: number) => (
 
@@ -104,7 +104,7 @@ export default async function Portfolio({
                                         className="rounded-full w-32 h-32 mx-auto"
                                     />
                                     <h2 className="text-center">{artist?.name}</h2>
-                                    <Link href={"/trade/" + artist?.id} className="block bg-green-500 text-white text-center py-2 rounded">TRADE</Link>
+                                    <Link href={"/trade/" + artist?.spotify_id} className=" flex flex-row items-center ml-4 pl-9  bg-green-500 text-white text-center py-2 rounded"><FaExchangeAlt className="mr-2" ></FaExchangeAlt> TRADE</Link>
                                 </th>
                                 <td>
                                     <p className="text-center">Coins Invested: {investedArtists[index].coins}</p>

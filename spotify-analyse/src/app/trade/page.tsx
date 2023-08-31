@@ -6,6 +6,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { options } from "../api/auth/[...nextauth]/options";
 import Sidebar from "../components/trade/sidebar";
+import { FaExchangeAlt } from 'react-icons/fa'
 
 
 
@@ -80,7 +81,7 @@ export default async function Trade({
                                 className="rounded-full w-32 h-32 mx-auto"
                             />
                             <h2 className="text-center">{artist?.name}</h2>
-                            <Link href={"/trade/" + artist?.id} className="block bg-green-500 text-white text-center py-2 rounded">TRADE</Link>
+                            <Link href={"/trade/" + artist?.id} className=" flex flex-row items-center ml-4 pl-9  bg-green-500 text-white text-center py-2 rounded"><FaExchangeAlt className="mr-2" > </FaExchangeAlt> TRADE</Link>
                         </div>
                     ))}
 

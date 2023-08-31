@@ -1,4 +1,4 @@
-(A) Sell Button ändern 
+(A) Sell Button ändern {cm:2023-08-30} {h}
 (A) Invest-künster back Button {start:2023-08-29T15:48:00} {cm:2023-08-29} {duration:56m} {h}
 (C) Leaderboard
 (A) Porfolio {start:2023-08-29T17:02:15} {cm:2023-08-29} {duration:04h53m} {h}
@@ -8,5 +8,5 @@
 (B) Shop
 (B) Glücksspiel
 (E) Trade Statistic
-(A) Buy und Sell Bug fixing @important {start:2023-08-29T22:08:23}
+(A) Buy und Sell Bug fixing @important {start:2023-08-29T22:08:23} {cm:2023-08-30} {duration:13h53m}
 (A) Search artist on /trade @important
