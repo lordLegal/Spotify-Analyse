@@ -1,40 +1,45 @@
-import mysql.connector
 import requests
 import os
 from dotenv import load_dotenv
 import time
+from pymongo import MongoClient
+from pymongo.cursor import Cursor
 
 
 load_dotenv()
 
-host = str(os.getenv("HOST"))
-user = str(os.getenv("USER"))
-password = str(os.getenv("PASSWORD"))
-db = str(os.getenv("DB"))
+client = MongoClient(os.getenv("MONGODB_URI"))
+db = client["tradespotify"]
 
-mydb = mysql.connector.connect(host=host, user=user, password=password, database=db)
-
-con = mydb.cursor(buffered=True)
 
 while True:
-    con.execute("SELECT * FROM artist;")
-
-    artists = con.fetchall()
+    artist = db["Artist"]
+    artists = artist.find()
+    artistData = db["ArtistData"]
 
     for artist in artists:
         print(artist)
-        spotify_id = artist[1]
+        spotify_id = artist["spotify_id"]
         monthly = (
-            requests.get(("http://127.0.0.1:8000/" + str(spotify_id)))
+            requests.get(("http://81.217.39.104:8000/" + str(spotify_id)))
             .json()
             .get("monthly")
         )
-        countSql = f"SELECT COUNT(*) FROM artist_data WHERE fk_id_artist = {artist[0]};"
-        con.execute(countSql)
-        count = con.fetchall()[0][0]
-        print(count, monthly, spotify_id)
-        insertartistdata = f"INSERT INTO artist_data (fk_id_artist, monthly_listeners, data_count) VALUES ({artist[0]}, {monthly}, {count});"
-        print(insertartistdata)
-        con.execute(insertartistdata)
-        mydb.commit()
-    time.sleep(60)
+        print(monthly)
+        foundartist: Cursor = artistData.find({"artistId": spotify_id})
+
+        foundartist_list = list(foundartist)
+        if len(foundartist_list) > 0:
+            num = int(foundartist_list[-1]["data_count"]) + 1
+        else:
+            num = 1
+
+        artistData.insert_one(
+            {
+                "date": time.strftime("%d %b %Y %H:%M:%S"),
+                "artistId": spotify_id,
+                "monthly_listeners": monthly,
+                "data_count": num,
+            }
+        )
+    time.sleep((60 * 60) * 12)
