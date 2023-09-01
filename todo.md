@@ -9,4 +9,4 @@
 (B) Glücksspiel
 (E) Trade Statistic
 (A) Buy und Sell Bug fixing @important {start:2023-08-29T22:08:23} {cm:2023-08-30} {duration:13h53m}
-(A) Search artist on /trade @important
+(A) Search artist on /trade @important {cm:2023-09-01}
