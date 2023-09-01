@@ -15,6 +15,9 @@ export const options: NextAuthOptions = {
 
 
         async jwt({ token, user, account, profile, isNewUser }) {
+            console.log("jwt");
+
+
             const prisma = new PrismaClient();
 
             const profile_ = profile as any;
@@ -61,7 +64,11 @@ export const options: NextAuthOptions = {
                     },
                 });
 
+
+
+
                 if (api_user.length === 0) {
+
                     await prisma.apiUser.create({
                         data: {
                             access_token: account?.access_token,
@@ -76,6 +83,53 @@ export const options: NextAuthOptions = {
                         },
                     });
                 } else {
+
+                    const now = Math.floor(Date.now() / 1000);
+                    const difference = Math.floor(((api_user[0]?.expries_at as number) - now) / 60);
+                    const refreshToken = api_user[0]?.refreshtoken as string;
+                    console.log(`Token still active for ${difference} minutes.`);
+
+                    // If the token is older than 50 minutes, fetch a new one
+                    if (difference <= 10) {
+                        console.log("Token expired, fetching new one...");
+                        const request = await fetch("https://accounts.spotify.com/api/token", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded",
+                                Authorization: `Basic ${Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`).toString("base64")}`,
+                            },
+                            body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
+                        });
+
+                        if (request.ok) {
+                            const response = await request.json();
+                            const { access_token, expires_in, refresh_token } = response;
+
+                            // Get the current timestamp in seconds
+                            const nowInSeconds = Math.floor(Date.now() / 1000);
+
+                            // Add 3600 seconds (1 hour) to the current timestamp
+                            const time = nowInSeconds + expires_in;
+
+                            await prisma.apiUser.update({
+                                where: {
+                                    id: api_user[0]?.id, // Added ?. for safer access
+                                },
+                                data: {
+                                    access_token: access_token,
+                                    refreshtoken: refresh_token ?? api_user[0]?.refreshtoken,
+                                    expries_at: time,
+                                },
+                            });
+
+                            token.accessToken = access_token;
+                            token.refreshToken = refresh_token;
+                            token.accessTokenExpires = time;
+                        } else {
+                            console.error(`Failed to refresh token: ${request.status} ${request.statusText}`);
+                        }
+                    }
+
                     await prisma.apiUser.update({
                         where: {
                             id: api_user[0]?.id, // Added ?. for safer access

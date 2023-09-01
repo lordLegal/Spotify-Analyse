@@ -8,13 +8,14 @@ generator client {
 }
 
 model ApiUser {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   access_token String?
   refreshtoken String?
   expries_at   Int?
   scope        String?
-  userId       String  @map("user") @db.ObjectId
-  user         User    @relation(fields: [userId], references: [id])
+  date         DateTime @default(now())
+  userId       String   @map("user") @db.ObjectId
+  user         User     @relation(fields: [userId], references: [id])
 }
 
 model Artist {

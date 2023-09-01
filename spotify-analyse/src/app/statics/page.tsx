@@ -11,7 +11,7 @@ import Chart from "../components/statics/chart";
 
 
 
-export default async function Home({
+export default async function Statics({
     params,
     searchParams,
 }: {

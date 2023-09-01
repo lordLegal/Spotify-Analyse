@@ -94,23 +94,25 @@ export default async function Portfolio({
 
                     <div className="flex-none  border-2 border-green-700 rounded-lg p-4 space-y-2 max-w-3xl" key={index}>
                         <table>
-                            <tr>
-                                <th className="w-48">
-                                    <Image
-                                        width='1000'
-                                        height='1000'
-                                        src={artist?.image}
-                                        alt="Artist Profile"
-                                        className="rounded-full w-32 h-32 mx-auto"
-                                    />
-                                    <h2 className="text-center">{artist?.name}</h2>
-                                    <Link href={"/trade/" + artist?.spotify_id} className=" flex flex-row items-center ml-4 pl-9  bg-green-500 text-white text-center py-2 rounded"><FaExchangeAlt className="mr-2" ></FaExchangeAlt> TRADE</Link>
-                                </th>
-                                <td>
-                                    <p className="text-center">Coins Invested: {investedArtists[index].coins}</p>
+                            <tbody>
+                                <tr>
+                                    <th className="w-48">
+                                        <Image
+                                            width='1000'
+                                            height='1000'
+                                            src={artist?.image}
+                                            alt="Artist Profile"
+                                            className="rounded-full w-32 h-32 mx-auto"
+                                        />
+                                        <h2 className="text-center">{artist?.name}</h2>
+                                        <Link href={"/trade/" + artist?.spotify_id} className=" flex flex-row items-center ml-4 pl-9  bg-green-500 text-white text-center py-2 rounded"><FaExchangeAlt className="mr-2" ></FaExchangeAlt> TRADE</Link>
+                                    </th>
+                                    <td>
+                                        <p className="text-center">Coins Invested: {investedArtists[index].coins}</p>
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 ))}

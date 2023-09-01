@@ -6,8 +6,8 @@ import Nav from "./components/navbar/nav"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Spotify Analyse',
-  description: 'Analyse your Spotify Data',
+  title: 'Spotify Trade',
+  description: 'Analyse and Trade with Coins using your Spotify Data',
 }
 
 export default function RootLayout({
