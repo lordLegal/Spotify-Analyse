@@ -111,7 +111,7 @@ export default async function Trade({
                 <form action={handleSearchArtist}>
                     <label className="text-xl font-bold">Artist:</label>
                     <input name="artist" type="text" className="text-black border-2 border-green-700 rounded-lg p-4 space-y-2 w-52" placeholder="Artist Name" />
-                    <button className="bg-green-500 text-white text-center py-2 rounded">Trade</button>
+                    <button className="bg-green-500 text-white text-center py-2 rounded">Search</button>
                 </form>
                 {artistResult === null ? '' :
                     <>
