@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://retox2:GNSV2u__00@tradespotify.kecndgk.mongodb.net/tradespotify?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const apiUserSchema = new mongoose.Schema({
     fk_id_user_api: Number,

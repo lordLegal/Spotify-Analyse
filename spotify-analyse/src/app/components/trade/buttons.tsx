@@ -29,9 +29,16 @@ export default async function Buttons(params: any) {
         }
     })
 
-    const tradeArtist = await prisma.investArtist.findFirst({
+    const artists = await prisma.artist.findFirst({
         where: {
-            artistId: artist?.id,
+            spotify_id: artist
+        }
+    })
+
+
+    const tradeArtist = await prisma.investArtist.findUnique({
+        where: {
+            artistId: artists?.id,
             userId: user?.id
         }
     })
@@ -42,7 +49,7 @@ export default async function Buttons(params: any) {
     const coins = tradeUser?.coins as number;
     const coinsInvested = tradeUser?.coins_invested as number;
     const max = coins as number;
-    const sellMax = (tradeArtist?.coins as number) + (tradeArtist?.plusCoins as number);
+    const sellMax = (tradeArtist?.coins as number);
     console.log(tradeArtist?.coins as number);
     console.log(sellMax);
 

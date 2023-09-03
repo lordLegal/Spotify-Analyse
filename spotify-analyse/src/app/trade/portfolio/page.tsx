@@ -88,7 +88,7 @@ export default async function Portfolio({
             <p className="font-bold text-3xl">{session?.user?.name}</p>
             <p className=" text-xl" >Coins: <span className="font-bold">{coins}</span></p>
             <h3 className="text-3xl font-bold text-white mt-4">Invested Artists</h3>
-            {artists?.length === 0 && <p className="text-white">You have not invested in any artists yet.</p>}
+            {artists?.length === 0 && <p className="text-white">You have not invested in any artists yet. Invest here in an Artist:  <Link className="text-green-600" href="/trade">Trade!!!</Link></p>}
             <div className="grid grid-cols-1 gap-4">
                 {artists?.map((artist: any, index: number) => (
 
@@ -109,6 +109,7 @@ export default async function Portfolio({
                                     </th>
                                     <td>
                                         <p className="text-center">Coins Invested: {investedArtists[index].coins}</p>
+                                        <p className="text-center">Coins Earned: {investedArtists[index].plusCoins}</p>
 
                                     </td>
                                 </tr>

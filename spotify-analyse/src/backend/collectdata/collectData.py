@@ -8,6 +8,8 @@ from pymongo.cursor import Cursor
 
 load_dotenv()
 
+apiUrl = os.getenv("API_URL")
+
 client = MongoClient(os.getenv("MONGODB_URI"))
 db = client["tradespotify"]
 
@@ -20,11 +22,7 @@ while True:
     for artist in artists:
         print(artist)
         spotify_id = artist["spotify_id"]
-        monthly = (
-            requests.get(("http://81.217.39.104:8000/" + str(spotify_id)))
-            .json()
-            .get("monthly")
-        )
+        monthly = requests.get(("" + str(spotify_id))).json().get("monthly")
         print(monthly)
         foundartist: Cursor = artistData.find({"artistId": spotify_id})
 

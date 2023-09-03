@@ -7,6 +7,7 @@ import Script from "next/script";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import Buttons from "@/app/components/trade/buttons";
 import { IoMdArrowRoundBack } from 'react-icons/io'
+import { env } from "process";
 
 
 
@@ -61,7 +62,7 @@ export default async function Trade({
     })
 
     const artist = await artist_res?.json();
-    const artist_mothly_listeners_url = 'http://81.217.39.104:8000/' + params?.artist_id as string
+    const artist_mothly_listeners_url = env.API_URL + params?.artist_id as string
     const artist_mothly_listeners_res = await fetch(artist_mothly_listeners_url, {
         method: 'GET',
     })
