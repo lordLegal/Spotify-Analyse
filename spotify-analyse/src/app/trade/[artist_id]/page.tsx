@@ -8,6 +8,7 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 import Buttons from "@/app/components/trade/buttons";
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import { env } from "process";
+import ArtistChart from "@/app/components/trade/artistChart";
 
 
 
@@ -91,6 +92,29 @@ export default async function Trade({
         });
     }
 
+    const artistData = await prisma.artistData.findMany({
+        where: {
+            artistId: dbartist[0]?.spotify_id as string,
+        },
+    });
+    var monthly_listeners = []
+    var date = []
+    const artistDataLength = artistData.length
+    for (let i = 0; i < artistData.length; i++) {
+        
+        monthly_listeners.push(artistData[i].monthly_listeners)
+        date.push(artistData[i].date)
+
+    }
+
+    const artistDatalist = {
+        "monthly_listeners": monthly_listeners,
+        "date": date,
+        "artistDataLength": artistDataLength,
+        "artist": artist?.name,
+    } 
+    
+
 
 
     return (
@@ -106,8 +130,10 @@ export default async function Trade({
                     <p className=" text-xl" >Monthly Listeners: <span className="font-bold">{monthly}</span></p>
                 </div>
             </div>
+            <ArtistChart artistData={artistDatalist}></ArtistChart>
 
             <div className=" flex justify-center items-center ">
+                    
                 <div className="flex space-x-4">
                     <Buttons artist={params?.artist_id}></Buttons>
                 </div>

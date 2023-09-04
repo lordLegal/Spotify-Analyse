@@ -77,6 +77,8 @@ export default async function Portfolio({
     })
     const topArtists = await topArtists_res.json();
 
+    
+
 
 
     return (
@@ -108,8 +110,9 @@ export default async function Portfolio({
                                         <Link href={"/trade/" + artist?.spotify_id} className=" flex flex-row items-center ml-4 pl-9  bg-green-500 text-white text-center py-2 rounded"><FaExchangeAlt className="mr-2" ></FaExchangeAlt> TRADE</Link>
                                     </th>
                                     <td>
-                                        <p className="text-center">Coins Invested: {investedArtists[index].coins}</p>
+                                        <p className="text-center">Coins Invested: {investedArtists[index].investedCoins}</p>
                                         <p className="text-center">Coins Earned: {investedArtists[index].plusCoins}</p>
+                                        <p className="text-center">Coins all: {investedArtists[index].coins}</p>
 
                                     </td>
                                 </tr>

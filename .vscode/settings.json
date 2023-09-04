@@ -15,5 +15,6 @@
             "database": "tradespotify"
         }
     ],
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "nuxt.isNuxtApp": false
 }

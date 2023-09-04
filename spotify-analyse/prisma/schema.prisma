@@ -23,18 +23,16 @@ model Artist {
   spotify_id        String?
   name              String?
   image             String?
-  artist_data       ArtistData[]
   invest_artist_log InvestArtistLog[]
   invest_artist     InvestArtist[]
 }
 
 model ArtistData {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  date              DateTime @default(now())
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  date              String?
   monthly_listeners Int?
-  data_count        Int?     @default(0)
-  artistId          String   @map("artist") @db.ObjectId
-  artist            Artist   @relation(fields: [artistId], references: [id])
+  data_count        Int?    @default(0)
+  artistId          String?
 }
 
 model InvestArtistLog {
