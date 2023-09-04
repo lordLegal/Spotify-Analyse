@@ -26,4 +26,4 @@ To get started with **TradeSpotify**, simply:
 
 ## Feedback & Contributions
 
-We're always looking to improve **Spotify-Analyse**. If you have any feedback or suggestions, or if you'd like to contribute to the project, please feel free to reach out or submit a pull request.
+We're always looking to improve **TradeSpotify**. If you have any feedback or suggestions, or if you'd like to contribute to the project, please feel free to reach out or submit a pull request.
