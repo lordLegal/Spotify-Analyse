@@ -4,7 +4,7 @@ Welcome to **Spotify-Analyse**, a comprehensive tool designed to offer insights 
 
 ## Overview
 
-**Spotify-Analyse** is a web application that allows users to delve deep into their Spotify data, providing visualizations and analytics of their listening habits. From top artists and songs to favorite genres, this tool offers a detailed breakdown of your musical journey on Spotify.
+**TradeSpotify** is a web application that allows users to delve deep into their Spotify data, providing visualizations and analytics of their listening habits. From top artists and songs to favorite genres, this tool offers a detailed breakdown of your musical journey on Spotify.
 
 ## Features
 
@@ -18,7 +18,7 @@ Welcome to **Spotify-Analyse**, a comprehensive tool designed to offer insights 
 
 ## Getting Started
 
-To get started with **Spotify-Analyse**, simply:
+To get started with **TradeSpotify**, simply:
 
 1. Visit the application.
 2. Log in with your Spotify account.
