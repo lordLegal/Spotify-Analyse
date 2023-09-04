@@ -1,4 +1,4 @@
-# Spotify-Analyse
+# TradeSpotify
 
 Welcome to **Spotify-Analyse**, a comprehensive tool designed to offer insights into your Spotify listening habits and more!
 
