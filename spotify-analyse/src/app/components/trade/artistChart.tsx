@@ -24,10 +24,6 @@ ChartJS.register(
 
 export default function ArtistChart({ artistData }: { artistData: any }) {
 
-    // loop through artistData and create a new array with the data we need like date, mothly listeners, etc.
-
-    console.log(artistData)
-
 
     
     const options = {

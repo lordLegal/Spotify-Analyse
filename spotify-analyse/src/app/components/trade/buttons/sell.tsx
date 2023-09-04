@@ -6,10 +6,8 @@ import { sellHandler } from '../action/tradehandler';
 export default function Sell(params: any) {
 
     let max = params.max;
-    const coins = params.coins;
     const artist = params.artist;
     const user = params.user;
-    console.log(max);
 
     if (isNaN(max)) {
         max = 0;

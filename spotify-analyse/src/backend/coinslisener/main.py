@@ -63,7 +63,6 @@ while True:
                     plusCoins = (int(investartist["coins"]) * int(percentage)) - int(
                         investartist["coins"]
                     )
-                    print(plusCoins)
                     InvestArtist.update_one(
                         {"_id": investartist["_id"]},
                         {

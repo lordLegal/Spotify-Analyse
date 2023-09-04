@@ -43,15 +43,14 @@ export default async function Buttons(params: any) {
         }
     })
 
-    console.log(tradeArtist);
+
 
 
     const coins = tradeUser?.coins as number;
     const coinsInvested = tradeUser?.coins_invested as number;
     const max = coins as number;
     const sellMax = (tradeArtist?.coins as number);
-    console.log(tradeArtist?.coins as number);
-    console.log(sellMax);
+
 
 
 

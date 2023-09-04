@@ -6,11 +6,9 @@ import { buyHandler } from '../action/tradehandler';
 export default function Buy(params: any) {
 
     const max = params.max;
-    const coins = params.coins;
     const artist = params.artist;
     const user = params.user;
 
-    console.log(max);
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 

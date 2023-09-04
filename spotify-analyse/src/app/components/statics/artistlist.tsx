@@ -26,7 +26,6 @@ export default async function Artistlist(artist_time_range = 'short_term' as any
             userId: user?.id
         }
     })
-    console.log(artist_time_range.artist_time_range)
     const artist_url = 'https://api.spotify.com/v1/me/top/artists?limit=10&time_range=' + artist_time_range.artist_time_range
     const topArtists_res = await fetch(artist_url, {
         method: 'GET',

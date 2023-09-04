@@ -24,9 +24,6 @@ export default async function Trade({
 }) {
     "use server";
 
-    console.log(params?.artist_id as string)
-    console.log(searchParams)
-
     const session = await getServerSession(options)
 
     const prisma = new PrismaClient()
@@ -54,7 +51,6 @@ export default async function Trade({
 
 
     const artist_url = 'https://api.spotify.com/v1/artists/' + params?.artist_id as string
-    console.log(artist_url)
     const artist_res = await fetch(artist_url, {
         method: 'GET',
         headers: {
@@ -71,8 +67,6 @@ export default async function Trade({
 
     const artist_mothly_listeners = await artist_mothly_listeners_res?.json();
     const monthly = formatNumberWithDots(artist_mothly_listeners.monthly);
-
-    console.log(monthly)
 
     const dbartist = await prisma.artist.findMany({
         where: {

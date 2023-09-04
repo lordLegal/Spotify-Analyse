@@ -87,11 +87,9 @@ export const options: NextAuthOptions = {
                     const now = Math.floor(Date.now() / 1000);
                     const difference = Math.floor(((api_user[0]?.expries_at as number) - now) / 60);
                     const refreshToken = api_user[0]?.refreshtoken as string;
-                    console.log(`Token still active for ${difference} minutes.`);
 
                     // If the token is older than 50 minutes, fetch a new one
                     if (difference <= 10) {
-                        console.log("Token expired, fetching new one...");
                         const request = await fetch("https://accounts.spotify.com/api/token", {
                             method: "POST",
                             headers: {

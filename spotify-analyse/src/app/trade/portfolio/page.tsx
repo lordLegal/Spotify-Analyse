@@ -47,7 +47,7 @@ export default async function Portfolio({
         }
     })
 
-    console.log(investedArtists)
+
 
     const artists = await Promise.all(investedArtists.map(async (investedArtist) => {
         const artist = await prisma.artist.findFirst({
@@ -58,7 +58,6 @@ export default async function Portfolio({
         return artist
     }))
 
-    console.log(artists)
 
 
     function formatNumberWithDots(number: number): string {
@@ -77,7 +76,7 @@ export default async function Portfolio({
     })
     const topArtists = await topArtists_res.json();
 
-    
+
 
 
 

@@ -47,7 +47,6 @@ export default async function Statics({
     for (let i = 0; i <= 2; i++) {
         const x = [0, 49]
         const large_song_url = 'https://api.spotify.com/v1/me/top/tracks?limit=49&time_range=' + song_time_range + '&offset=' + x[i]
-        console.log(large_song_url)
         const large_topSongs_res = await fetch(large_song_url, {
             method: 'GET',
             headers: {

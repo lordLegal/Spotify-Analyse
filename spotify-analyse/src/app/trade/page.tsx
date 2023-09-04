@@ -75,11 +75,9 @@ export default async function Trade({
             }
         })
         artistResult = await artist_res.json();
-        console.log(artistResult)
         revalidatePath('/trade')
     }
 
-    console.log(artistResult)
 
 
     return (

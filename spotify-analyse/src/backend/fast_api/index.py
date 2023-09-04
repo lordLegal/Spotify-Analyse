@@ -35,13 +35,8 @@ async def artist(artist_id: str):
         if meta_description:
             contents = meta_description.get("content")  # type: ignore
             if contents:
-                print(contents)
                 content_words = str(contents).split(" ")
                 if len(content_words) > 7:
-                    print(content_words[9])
-                    print(content_words[8])
-                    print(content_words[7])
-
                     if content_words[7] == "·":
                         content = content_words[8]
                     elif content_words[7] == "Artist":
@@ -49,14 +44,11 @@ async def artist(artist_id: str):
                     else:
                         content = content_words[7]
 
-                    print(content)
                     # Handle the specific format
                     if content[-1] == "K":
                         content = content[:-1] + "00"
                     elif content[-1] == "M":
                         content = content[:-1] + "00000"
-
-                    print(content)
 
                     # Safely convert to integer
                     try:
