@@ -14,7 +14,7 @@ export default async function Home() {
       <div className="flex flex-col items-center justify-center min-h-screen py-2">
         <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center mt-60">
           <h1 className="text-6xl font-bold">
-            Welcome to <span className="text-green-600">Spotify Trade</span>
+            Welcome to <span className="text-green-600">Trade Spotify</span>
           </h1>
 
           <p className="mt-3 text-2xl">

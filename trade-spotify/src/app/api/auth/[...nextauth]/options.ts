@@ -8,7 +8,7 @@ export const options: NextAuthOptions = {
         SpotifyProvider({
             clientId: process.env.SPOTIFY_CLIENT_ID as string,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string,
-            authorization: "https://accounts.spotify.com/authorize?scope=user-read-email%20user-read-private%20user-read-playback-state%20user-read-currently-playing%20user-modify-playback-state%20user-read-recently-played%20user-top-read",
+            authorization: "https://accounts.spotify.com/authorize?scope=user-read-email%20user-read-private%20user-top-read",
         }),
     ],
     callbacks: {
