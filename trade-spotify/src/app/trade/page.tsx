@@ -22,9 +22,6 @@ export default async function Trade({
 }) {
 
 
-
-
-
     const session = await getServerSession(options)
 
     const prisma = new PrismaClient()

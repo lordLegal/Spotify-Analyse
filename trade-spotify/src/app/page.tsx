@@ -22,7 +22,7 @@ export default async function Home() {
           </p>
 
           <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full ">
-            <Link className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-green-600 focus:text-green-600" href="/api/auth/signin">
+            <Link className="p-6 mt-6 text-left border w-96 rounded-xl border-black hover:text-green-600 focus:text-green-600" href="/api/auth/signin">
               <h3 className="text-2xl font-bold">Login &rarr;</h3>
               <p className="mt-4 text-xl">
                 Login with your Spotify Account
@@ -36,7 +36,7 @@ export default async function Home() {
 
 
             <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-              <div className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-green-600 focus:text-green-600">
+              <div className="p-6 mt-6 text-left border w-96 rounded-xl border-black hover:text-green-600 focus:text-green-600">
                 <h3 className="text-2xl font-bold">What is it? &rarr;</h3>
                 <p className="mt-4 text-xl">
                   Spotify Trade is a Web App that allows you to analyse your Spotify Data and trade with Coins.
@@ -46,7 +46,7 @@ export default async function Home() {
 
 
             <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-              <div className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-green-600 focus:text-green-600">
+              <div className="p-6 mt-6 text-left border w-96 rounded-xl border-black hover:text-green-600 focus:text-green-600">
                 <h3 className="text-2xl font-bold">How does it work? &rarr;</h3>
                 <p className="mt-4 text-xl">
                   Spotify Trade uses the Spotify API to get your Top Artists and Top Tracks. With this data you can trade with Coins.
@@ -55,7 +55,7 @@ export default async function Home() {
             </div>
 
             <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-              <div className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-green-600 focus:text-green-600">
+              <div className="p-6 mt-6 text-left border w-96 rounded-xl border-black hover:text-green-600 focus:text-green-600">
                 <h3 className="text-2xl font-bold">What can I do with it? &rarr;</h3>
                 <p className="mt-4 text-xl">
                   You can trade with Coins. You can invest in your Top Artists. You can also trade .
