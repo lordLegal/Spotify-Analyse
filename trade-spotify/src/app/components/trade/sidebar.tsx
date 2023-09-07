@@ -15,6 +15,7 @@ export default function Sidebar({
     const user = params.user;
     const coins = params.coins;
     const session = params.session;
+    
 
     const [isVisible, setIsVisible] = useState(true);
 
@@ -32,7 +33,7 @@ export default function Sidebar({
             <div
                 className={`fixed w-64 h-screen bg-green-700 p-4 transform transition-transform duration-300 ${isVisible ? 'translate-x-0' : '-translate-x-64'}`}
             >
-                <div className="flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center text-white">
                     {/* Close Sidebar Button */}
                     <button type='button' title='Close'
                         onClick={() => setIsVisible(false)}
