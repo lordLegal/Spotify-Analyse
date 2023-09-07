@@ -81,7 +81,7 @@ export default async function Artistlist(artist_time_range = 'short_term' as any
                     </thead>
                     <tbody>
                         {topArtists?.items?.map((artist: any, index: number) => (
-                            <tr className="border-b border-zinc-900" key={index}>
+                            <tr className="border-b border-zinc-900 text-white " key={index}>
                                 <td className="py-2 px-4 text-center">{index + 1}</td>
                                 <td className="py-2 px-4"><Image className="w-16 h-16 object-cover rounded-lg" width='1000' height='1000' alt={artist.name} src={artist.images[0].url}></Image></td>
                                 <td className="py-2 px-4">{artist.name}</td>
