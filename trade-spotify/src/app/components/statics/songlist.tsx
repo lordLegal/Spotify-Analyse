@@ -72,7 +72,7 @@ export default async function Songlist(song_time_range = 'short_term' as any) {
                     <tbody>
                         {topSongs?.items?.map((song: any, index: number) => (
 
-                            <tr className="border-b border-zinc-900" key={index}>
+                            <tr className="border-b border-zinc-900 text-white" key={index}>
                                 <td className="py-2 px-4 text-center">{index + 1}</td>
                                 <td className="py-2 px-4"><Image className="w-16 h-16 object-cover rounded-lg" width='1000' height='1000' alt={song.name} src={song.album.images[0].url}></Image></td>
                                 <td className="py-2 px-4 text-xs md:text-xl">{song.name}</td>
