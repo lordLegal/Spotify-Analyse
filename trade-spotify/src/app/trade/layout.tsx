@@ -52,7 +52,7 @@ export default async function TradeLayout({
         <>
             {session ? (
 
-                <div className=" h-screen ">
+                <div className=" ">
 
                     <Sidebar params={{ user: user, coins: coins, session: session }}></Sidebar>
                     <div className="flex flex-col items-center   ">

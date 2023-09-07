@@ -124,7 +124,7 @@ export default async function Trade({
                             </thead>
                             <tbody>
                                 {artistResult?.artists?.items?.map((artist: any, index: number) => (
-                                    <tr className="border-b border-zinc-900" key={index}>
+                                    <tr className="border-b border-zinc-900 text-white" key={index}>
                                         <td className="py-2 px-4"><Image className="w-16 h-16 object-cover rounded-lg" width='1000' height='1000' alt={artist?.name} src={artist?.images[0]?.url}></Image></td>
                                         <td className="py-2 px-4 text-xs md:text-xl">{artist?.name}</td>
                                         <td className="px-2 py-4"><Link href={"/trade/" + artist?.id} className=" flex flex-col items-center text-center  bg-green-500 text-white py-2 rounded"><FaExchangeAlt className="mr-2" > </FaExchangeAlt> TRADE</Link></td>
