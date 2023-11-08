@@ -77,7 +77,7 @@ export default async function Songlist(song_time_range = 'short_term' as any) {
                                 <td className="py-2 px-4 text-center">{index + 1}</td>
                                 <td className="py-2 px-4"><Image className="w-16 h-16 object-cover " width='1000' height='1000' alt={song.name} src={song.album.images[0].url}></Image></td>
                                 <td className="py-2 px-4 text-xs md:text-xl">{song.name}</td>
-                                <td className="py-2 px-4 text-xs md:text-xl"><Link href={song.external_urls.spotify}><FaSpotify className="fill-green-500" ></FaSpotify> Open with Spotify <VscLinkExternal className="fill-green-500"></VscLinkExternal></Link></td>
+                                <td className="py-2 px-4 text-xs md:text-lg"><Link href={song.external_urls.spotify}><FaSpotify className="fill-green-500" ></FaSpotify> Open with Spotify <VscLinkExternal className="fill-green-500"></VscLinkExternal></Link></td>
                             </tr>
 
                         ))}

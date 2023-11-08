@@ -86,7 +86,7 @@ export default async function Artistlist(artist_time_range = 'short_term' as any
                                 <td className="py-2 px-4 text-center">{index + 1}</td>
                                 <td className="py-2 px-4"><Image className="w-16 h-16 object-cover rounded-full" width='1000' height='1000' alt={artist.name} src={artist.images[0].url}></Image></td>
                                 <td className="py-2 px-4">{artist.name}</td>
-                                <td className="py-2 px-4 text-xs md:text-xl"><Link href={artist.external_urls.spotify}> <FaSpotify className="fill-green-500" ></FaSpotify> Open with Spotify <VscLinkExternal className="fill-green-500"></VscLinkExternal></Link></td>
+                                <td className="py-2 px-4 text-xs md:text-lg"><Link href={artist.external_urls.spotify}> <FaSpotify className="fill-green-500" ></FaSpotify> Open with Spotify <VscLinkExternal className="fill-green-500"></VscLinkExternal></Link></td>
                             </tr>
                         ))}
 
