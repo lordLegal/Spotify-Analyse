@@ -14,7 +14,7 @@ export default async function Home() {
       <div className="flex flex-col items-center justify-center min-h-screen py-2">
         <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center mt-60">
           <h1 className="text-6xl font-bold">
-            Welcome to <span className="text-green-600">Trade Spotify</span>
+            Welcome to <span className="text-green-600">Tradei</span>
           </h1>
 
           <p className="mt-3 text-2xl">
@@ -39,7 +39,7 @@ export default async function Home() {
               <div className="p-6 mt-6 text-left border w-96 rounded-xl border-black dark:border-green-600 hover:text-green-600 focus:text-green-600">
                 <h3 className="text-2xl font-bold">What is it? &rarr;</h3>
                 <p className="mt-4 text-xl">
-                  Spotify Trade is a Web App that allows you to analyse your Spotify Data and trade with Coins.
+                  Tradei is a Web App that allows you to analyse your Spotify Data and trade with Coins.
                 </p>
               </div>
             </div>
@@ -49,7 +49,7 @@ export default async function Home() {
               <div className="p-6 mt-6 text-left border w-96 rounded-xl border-black dark:border-green-600 hover:text-green-600 focus:text-green-600">
                 <h3 className="text-2xl font-bold">How does it work? &rarr;</h3>
                 <p className="mt-4 text-xl">
-                  Spotify Trade uses the Spotify API to get your Top Artists and Top Tracks. With this data you can trade with Coins.
+                  Tradei uses the Spotify API to get your Top Artists and Top Tracks. With this data you can trade with Coins.
                 </p>
               </div>
             </div>

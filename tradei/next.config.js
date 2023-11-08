@@ -2,9 +2,6 @@
 const nextConfig = {
     reactStrictMode: true,
     pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
-    experimental: {
-        serverActions: true,
-    },
     images: {
         remotePatterns: [{
             protocol: 'https',
