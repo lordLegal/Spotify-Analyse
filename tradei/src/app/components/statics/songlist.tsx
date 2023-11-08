@@ -5,6 +5,7 @@ import Image from "next/image";
 import { options } from "../../api/auth/[...nextauth]/options";
 import Link from "next/link";
 import { VscLinkExternal } from "react-icons/vsc";
+import { FaSpotify } from 'react-icons/fa'
 
 
 
@@ -74,9 +75,9 @@ export default async function Songlist(song_time_range = 'short_term' as any) {
 
                             <tr className="border-b border-zinc-900 text-white" key={index}>
                                 <td className="py-2 px-4 text-center">{index + 1}</td>
-                                <td className="py-2 px-4"><Image className="w-16 h-16 object-cover rounded-lg" width='1000' height='1000' alt={song.name} src={song.album.images[0].url}></Image></td>
+                                <td className="py-2 px-4"><Image className="w-16 h-16 object-cover " width='1000' height='1000' alt={song.name} src={song.album.images[0].url}></Image></td>
                                 <td className="py-2 px-4 text-xs md:text-xl">{song.name}</td>
-                                <td className="py-2 px-4 text-xs md:text-xl"><Link href={song.external_urls.spotify}><VscLinkExternal></VscLinkExternal></Link></td>
+                                <td className="py-2 px-4 text-xs md:text-xl"><Link href={song.external_urls.spotify}><FaSpotify className="fill-green-500" ></FaSpotify> Open with Spotify <VscLinkExternal className="fill-green-500"></VscLinkExternal></Link></td>
                             </tr>
 
                         ))}

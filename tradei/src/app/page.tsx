@@ -68,9 +68,7 @@ export default async function Home() {
 
         </main>
 
-        <footer className="flex items-center justify-center w-full h-24 border-t">
-          Coded and Designed by <Link href="https://github.com/lordLegal" className="text-green-600">Martin Beneder</Link>
-        </footer>
+        
 
       </div>
 

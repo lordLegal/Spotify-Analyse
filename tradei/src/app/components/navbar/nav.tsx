@@ -41,7 +41,7 @@ export default async function Nav() {
                     <div className="flex items-center justify-between">
 
                         <div className="text-white font-bold text-xl">
-                            <Link href="/">Trade Spotify</Link>
+                            <Link href="/">Tradei</Link>
                         </div>
 
                         <div className="hidden md:flex space-x-4">
